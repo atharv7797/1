@@ -1,0 +1,1320 @@
+﻿Here are all 23 MSBTE Data Structures practical programs in sequential order, with filenames and plain-text code, compatible with classic Turbo C. Save each program separately using the suggested filename.
+
+Program 1 — P01_LINEAR_NUM.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,key,i,found=0;
+    clrscr();
+
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+
+    printf("Enter elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    printf("Enter element to search: ");
+    scanf("%d",&key);
+
+    for(i=0;i<n;i++)
+    {
+        if(a[i]==key)
+        {
+            printf("Found at position %d",i+1);
+            found=1;
+            break;
+        }
+    }
+
+    if(found==0)
+        printf("Element not found");
+
+    getch();
+}
+
+
+Program 2 — P02_LINEAR_STR.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void main()
+{
+    char a[10][20],key[20];
+    int n,i,found=0;
+    clrscr();
+
+    printf("Enter number of strings: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        scanf("%19s",a[i]);
+
+    printf("Enter string to search: ");
+    scanf("%19s",key);
+
+    for(i=0;i<n;i++)
+    {
+        if(strcmp(a[i],key)==0)
+        {
+            printf("Found at position %d",i+1);
+            found=1;
+            break;
+        }
+    }
+
+    if(found==0)
+        printf("String not found");
+
+    getch();
+}
+
+
+Program 3 — P03_BINARY_NUM.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,key,low,high,mid,i;
+    clrscr();
+
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+
+    printf("Enter sorted elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    printf("Enter element to search: ");
+    scanf("%d",&key);
+
+    low=0;
+    high=n-1;
+
+    while(low<=high)
+    {
+        mid=(low+high)/2;
+
+        if(a[mid]==key)
+        {
+            printf("Found at position %d",mid+1);
+            getch();
+            return;
+        }
+        else if(key>a[mid])
+            low=mid+1;
+        else
+            high=mid-1;
+    }
+
+    printf("Element not found");
+    getch();
+}
+
+
+Program 4 — P04_BINARY_STR.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void main()
+{
+    char a[10][20],key[20];
+    int n,low,high,mid,i,c;
+    clrscr();
+
+    printf("Enter number of strings: ");
+    scanf("%d",&n);
+
+    printf("Enter strings alphabetically:\n");
+    for(i=0;i<n;i++)
+        scanf("%19s",a[i]);
+
+    printf("Enter string to search: ");
+    scanf("%19s",key);
+
+    low=0;
+    high=n-1;
+
+    while(low<=high)
+    {
+        mid=(low+high)/2;
+        c=strcmp(a[mid],key);
+
+        if(c==0)
+        {
+            printf("Found at position %d",mid+1);
+            getch();
+            return;
+        }
+        else if(c<0)
+            low=mid+1;
+        else
+            high=mid-1;
+    }
+
+    printf("String not found");
+    getch();
+}
+
+
+Program 5 — P05_BUBBLE_NUM.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,i,j,temp;
+    clrscr();
+
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<n-i-1;j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+
+    printf("Sorted array:\n");
+    for(i=0;i<n;i++)
+        printf("%d ",a[i]);
+
+    getch();
+}
+
+
+Program 6 — P06_BUBBLE_STR.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void main()
+{
+    char a[10][20],temp[20];
+    int n,i,j;
+    clrscr();
+
+    printf("Enter number of strings: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        scanf("%19s",a[i]);
+
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<n-i-1;j++)
+        {
+            if(strcmp(a[j],a[j+1])>0)
+            {
+                strcpy(temp,a[j]);
+                strcpy(a[j],a[j+1]);
+                strcpy(a[j+1],temp);
+            }
+        }
+    }
+
+    printf("Sorted strings:\n");
+    for(i=0;i<n;i++)
+        printf("%s\n",a[i]);
+
+    getch();
+}
+
+
+Program 7 — P07_SELECTION_NUM.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,i,j,min,temp;
+    clrscr();
+
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    for(i=0;i<n-1;i++)
+    {
+        min=i;
+
+        for(j=i+1;j<n;j++)
+            if(a[j]<a[min])
+                min=j;
+
+        temp=a[i];
+        a[i]=a[min];
+        a[min]=temp;
+    }
+
+    printf("Sorted array:\n");
+    for(i=0;i<n;i++)
+        printf("%d ",a[i]);
+
+    getch();
+}
+
+
+Program 8 — P08_SELECTION_STR.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void main()
+{
+    char a[10][20],temp[20];
+    int n,i,j,min;
+    clrscr();
+
+    printf("Enter number of strings: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        scanf("%19s",a[i]);
+
+    for(i=0;i<n-1;i++)
+    {
+        min=i;
+
+        for(j=i+1;j<n;j++)
+            if(strcmp(a[j],a[min])<0)
+                min=j;
+
+        strcpy(temp,a[i]);
+        strcpy(a[i],a[min]);
+        strcpy(a[min],temp);
+    }
+
+    printf("Sorted strings:\n");
+    for(i=0;i<n;i++)
+        printf("%s\n",a[i]);
+
+    getch();
+}
+
+
+Program 9 — P09_INSERTION_NUM.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,i,j,key;
+    clrscr();
+
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    for(i=1;i<n;i++)
+    {
+        key=a[i];
+        j=i-1;
+
+        while(j>=0 && a[j]>key)
+        {
+            a[j+1]=a[j];
+            j--;
+        }
+
+        a[j+1]=key;
+    }
+
+    printf("Sorted array:\n");
+    for(i=0;i<n;i++)
+        printf("%d ",a[i]);
+
+    getch();
+}
+
+
+Program 10 — P10_SLL_BEGIN_SEARCH.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *head=NULL;
+
+void insert()
+{
+    struct node *p;
+    p=(struct node*)malloc(sizeof(struct node));
+
+    if(p==NULL)
+        return;
+
+    printf("Enter data: ");
+    scanf("%d",&p->data);
+
+    p->next=head;
+    head=p;
+}
+
+void search()
+{
+    struct node *p=head;
+    int key,pos=1;
+
+    printf("Enter element: ");
+    scanf("%d",&key);
+
+    while(p!=NULL)
+    {
+        if(p->data==key)
+        {
+            printf("Found at position %d",pos);
+            return;
+        }
+
+        p=p->next;
+        pos++;
+    }
+
+    printf("Not found");
+}
+
+void display()
+{
+    struct node *p=head;
+
+    while(p!=NULL)
+    {
+        printf("%d -> ",p->data);
+        p=p->next;
+    }
+
+    printf("NULL");
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Insert Beginning\n2.Search");
+        printf("\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: insert(); break;
+            case 2: search(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 11 — P11_SLL_END_DELETE.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *head=NULL;
+
+void insertEnd()
+{
+    struct node *p,*t;
+
+    p=(struct node*)malloc(sizeof(struct node));
+    if(p==NULL)
+        return;
+
+    printf("Enter data: ");
+    scanf("%d",&p->data);
+    p->next=NULL;
+
+    if(head==NULL)
+        head=p;
+    else
+    {
+        t=head;
+        while(t->next!=NULL)
+            t=t->next;
+        t->next=p;
+    }
+}
+
+void deleteBegin()
+{
+    struct node *t;
+
+    if(head==NULL)
+    {
+        printf("List empty");
+        return;
+    }
+
+    t=head;
+    printf("Deleted: %d",t->data);
+    head=head->next;
+    free(t);
+}
+
+void display()
+{
+    struct node *t=head;
+
+    while(t!=NULL)
+    {
+        printf("%d -> ",t->data);
+        t=t->next;
+    }
+
+    printf("NULL");
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Insert End\n2.Delete Beginning");
+        printf("\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: insertEnd(); break;
+            case 2: deleteBegin(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 12 — P12_SLL_INSERT_AFTER.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *head=NULL;
+
+void insertEnd()
+{
+    struct node *p,*t;
+
+    p=(struct node*)malloc(sizeof(struct node));
+    if(p==NULL)
+        return;
+
+    printf("Enter data: ");
+    scanf("%d",&p->data);
+    p->next=NULL;
+
+    if(head==NULL)
+        head=p;
+    else
+    {
+        t=head;
+        while(t->next!=NULL)
+            t=t->next;
+        t->next=p;
+    }
+}
+
+void insertAfter()
+{
+    struct node *p,*t=head;
+    int key;
+
+    printf("Insert after which value? ");
+    scanf("%d",&key);
+
+    while(t!=NULL && t->data!=key)
+        t=t->next;
+
+    if(t==NULL)
+    {
+        printf("Element not found");
+        return;
+    }
+
+    p=(struct node*)malloc(sizeof(struct node));
+    if(p==NULL)
+        return;
+
+    printf("Enter new data: ");
+    scanf("%d",&p->data);
+
+    p->next=t->next;
+    t->next=p;
+}
+
+void display()
+{
+    struct node *t=head;
+
+    while(t!=NULL)
+    {
+        printf("%d -> ",t->data);
+        t=t->next;
+    }
+
+    printf("NULL");
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Insert End\n2.Insert After");
+        printf("\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: insertEnd(); break;
+            case 2: insertAfter(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 13 — P13_STACK_ARRAY.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#define MAX 5
+
+int stack[MAX],top=-1;
+
+void push()
+{
+    int x;
+
+    if(top==MAX-1)
+    {
+        printf("Stack Overflow");
+        return;
+    }
+
+    printf("Enter element: ");
+    scanf("%d",&x);
+    stack[++top]=x;
+}
+
+void pop()
+{
+    if(top==-1)
+        printf("Stack Underflow");
+    else
+        printf("Popped: %d",stack[top--]);
+}
+
+void display()
+{
+    int i;
+
+    for(i=top;i>=0;i--)
+        printf("\n%d",stack[i]);
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Push\n2.Pop\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: push(); break;
+            case 2: pop(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 14 — P14_STACK_LINKED.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *top=NULL;
+
+void push()
+{
+    struct node *p;
+    p=(struct node*)malloc(sizeof(struct node));
+
+    if(p==NULL)
+        return;
+
+    printf("Enter element: ");
+    scanf("%d",&p->data);
+
+    p->next=top;
+    top=p;
+}
+
+void pop()
+{
+    struct node *t;
+
+    if(top==NULL)
+    {
+        printf("Stack Underflow");
+        return;
+    }
+
+    t=top;
+    printf("Popped: %d",t->data);
+    top=top->next;
+    free(t);
+}
+
+void display()
+{
+    struct node *t=top;
+
+    while(t!=NULL)
+    {
+        printf("%d -> ",t->data);
+        t=t->next;
+    }
+
+    printf("NULL");
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Push\n2.Pop\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: push(); break;
+            case 2: pop(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 15 — P15_RECURSIVE_MULTIPLY.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+int multiply(int a,int b)
+{
+    if(b==0)
+        return 0;
+
+    if(b<0)
+        return -multiply(a,-b);
+
+    return a+multiply(a,b-1);
+}
+
+void main()
+{
+    int a,b;
+    clrscr();
+
+    printf("Enter two numbers: ");
+    scanf("%d%d",&a,&b);
+
+    printf("Product = %d",multiply(a,b));
+
+    getch();
+}
+
+
+Program 16 — P16_REVERSE_RECURSION.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+void reverse(char s[],int i)
+{
+    if(i<0)
+        return;
+
+    printf("%c",s[i]);
+    reverse(s,i-1);
+}
+
+void main()
+{
+    char s[50];
+    clrscr();
+
+    printf("Enter string: ");
+    scanf("%49s",s);
+
+    printf("Reverse string: ");
+    reverse(s,strlen(s)-1);
+
+    getch();
+}
+
+
+Program 17 — P17_LINEAR_QUEUE_ARRAY.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#define MAX 5
+
+int q[MAX],front=-1,rear=-1;
+
+void insert()
+{
+    int x;
+
+    if(rear==MAX-1)
+    {
+        printf("Queue Overflow");
+        return;
+    }
+
+    printf("Enter element: ");
+    scanf("%d",&x);
+
+    if(front==-1)
+        front=0;
+
+    q[++rear]=x;
+}
+
+void delete()
+{
+    if(front==-1)
+    {
+        printf("Queue Underflow");
+        return;
+    }
+
+    printf("Deleted: %d",q[front++]);
+
+    if(front>rear)
+        front=rear=-1;
+}
+
+void display()
+{
+    int i;
+
+    for(i=front;i!=-1 && i<=rear;i++)
+        printf("%d ",q[i]);
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: insert(); break;
+            case 2: delete(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 18 — P18_LINEAR_QUEUE_LINKED.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *front=NULL,*rear=NULL;
+
+void insert()
+{
+    struct node *p;
+    p=(struct node*)malloc(sizeof(struct node));
+
+    if(p==NULL)
+        return;
+
+    printf("Enter element: ");
+    scanf("%d",&p->data);
+    p->next=NULL;
+
+    if(rear==NULL)
+        front=rear=p;
+    else
+    {
+        rear->next=p;
+        rear=p;
+    }
+}
+
+void delete()
+{
+    struct node *t;
+
+    if(front==NULL)
+    {
+        printf("Queue Underflow");
+        return;
+    }
+
+    t=front;
+    printf("Deleted: %d",t->data);
+    front=front->next;
+
+    if(front==NULL)
+        rear=NULL;
+
+    free(t);
+}
+
+void display()
+{
+    struct node *t=front;
+
+    while(t!=NULL)
+    {
+        printf("%d -> ",t->data);
+        t=t->next;
+    }
+
+    printf("NULL");
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: insert(); break;
+            case 2: delete(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 19 — P19_CIRCULAR_QUEUE.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#define MAX 5
+
+int q[MAX],front=-1,rear=-1;
+
+void insert()
+{
+    int x;
+
+    if((rear+1)%MAX==front)
+    {
+        printf("Queue Overflow");
+        return;
+    }
+
+    printf("Enter element: ");
+    scanf("%d",&x);
+
+    if(front==-1)
+        front=rear=0;
+    else
+        rear=(rear+1)%MAX;
+
+    q[rear]=x;
+}
+
+void delete()
+{
+    if(front==-1)
+    {
+        printf("Queue Underflow");
+        return;
+    }
+
+    printf("Deleted: %d",q[front]);
+
+    if(front==rear)
+        front=rear=-1;
+    else
+        front=(front+1)%MAX;
+}
+
+void display()
+{
+    int i;
+
+    if(front==-1)
+    {
+        printf("Queue empty");
+        return;
+    }
+
+    i=front;
+
+    while(1)
+    {
+        printf("%d ",q[i]);
+
+        if(i==rear)
+            break;
+
+        i=(i+1)%MAX;
+    }
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\n");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: insert(); break;
+            case 2: delete(); break;
+            case 3: display(); break;
+        }
+    }while(ch!=4);
+
+    getch();
+}
+
+
+Program 20 — P20_BST_INORDER.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *left,*right;
+};
+
+struct node *create(int x)
+{
+    struct node *p;
+    p=(struct node*)malloc(sizeof(struct node));
+
+    if(p==NULL)
+        exit(1);
+
+    p->data=x;
+    p->left=NULL;
+    p->right=NULL;
+
+    return p;
+}
+
+struct node *insert(struct node *root,int x)
+{
+    if(root==NULL)
+        return create(x);
+
+    if(x<root->data)
+        root->left=insert(root->left,x);
+    else if(x>root->data)
+        root->right=insert(root->right,x);
+
+    return root;
+}
+
+void inorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+        printf("%d ",root->data);
+        inorder(root->right);
+    }
+}
+
+void main()
+{
+    struct node *root=NULL;
+    int n,i,x;
+    clrscr();
+
+    printf("Enter number of nodes: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+    {
+        printf("Enter value: ");
+        scanf("%d",&x);
+        root=insert(root,x);
+    }
+
+    printf("In-order traversal: ");
+    inorder(root);
+
+    getch();
+}
+
+
+Program 21 — P21_ARRAY_LINEAR_SEARCH.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,key,i,found=0;
+    clrscr();
+
+    printf("Enter array size: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    printf("Enter element to search: ");
+    scanf("%d",&key);
+
+    for(i=0;i<n;i++)
+    {
+        if(a[i]==key)
+        {
+            printf("Found at position %d",i+1);
+            found=1;
+            break;
+        }
+    }
+
+    if(found==0)
+        printf("Element not found");
+
+    getch();
+}
+
+
+Program 22 — P22_ARRAY_INSERT.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,i,pos,value;
+    clrscr();
+
+    printf("Enter number of elements (maximum 19): ");
+    scanf("%d",&n);
+
+    if(n<0 || n>=20)
+    {
+        printf("Invalid size");
+        getch();
+        return;
+    }
+
+    printf("Enter elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    printf("Enter position: ");
+    scanf("%d",&pos);
+
+    if(pos<1 || pos>n+1)
+    {
+        printf("Invalid position");
+        getch();
+        return;
+    }
+
+    printf("Enter value: ");
+    scanf("%d",&value);
+
+    for(i=n;i>=pos;i--)
+        a[i]=a[i-1];
+
+    a[pos-1]=value;
+    n++;
+
+    printf("Array after insertion:\n");
+    for(i=0;i<n;i++)
+        printf("%d ",a[i]);
+
+    getch();
+}
+
+
+Program 23 — P23_ARRAY_DELETE.C
+
+c
+#include<stdio.h>
+#include<conio.h>
+
+void main()
+{
+    int a[20],n,i,pos;
+    clrscr();
+
+    printf("Enter number of elements: ");
+    scanf("%d",&n);
+
+    if(n<1 || n>20)
+    {
+        printf("Invalid size");
+        getch();
+        return;
+    }
+
+    printf("Enter elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+
+    printf("Enter position to delete: ");
+    scanf("%d",&pos);
+
+    if(pos<1 || pos>n)
+    {
+        printf("Invalid position");
+        getch();
+        return;
+    }
+
+    for(i=pos-1;i<n-1;i++)
+        a[i]=a[i+1];
+
+    n--;
+
+    printf("Array after deletion:\n");
+    for(i=0;i<n;i++)
+        printf("%d ",a[i]);
+
+    getch();
+}
+
+
+Important: These are traditional Turbo C-style programs. Check array sizes before entering data, enter sorted values for binary search, and compile each file separately.
+
